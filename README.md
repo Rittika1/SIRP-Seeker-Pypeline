@@ -1,6 +1,10 @@
 # SIRP-Seeker-Pypeline
 Detect Signal Regulatory Proteins (SIRPs) in diverse genomes using this Python and Bash pipeline. Genome-agnostic, modular, and documented for easy integration.
 
+## Clone this repo
+You can clone this repo using 
+`git clone git@github.com:Rittika1/SIRP-Seeker-Pypeline.git`
+
 # SIRP Detection Workflow
 This document outlines the step-by-step workflow for downloading vertebrate protein datasets, filtering selected species, and applying the SIRP detection pipeline. The pipeline involves using command-line tools and custom Python scripts.
 
