@@ -39,3 +39,10 @@ makeblastdb -in selected_vertebrate_proteins_noisoform.faa -dbtype prot
 
 ##-- The following section represents a repeating part of the entire pipeline.
 ##-- A separate script will be created for this section to be used as a standalone part.
+python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py selected_vertebrate_proteins_noisoform.faa SIRP-seqs .
+
+##--The python line will make the necessary bashfiles and store them in the bashfiles folder. For running the bashfiles, we will use the following code snippet.
+for file in bashfiles/*.sh ; do
+    echo "Running $file"
+    bash "$file"
+done

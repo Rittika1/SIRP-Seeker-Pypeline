@@ -38,18 +38,18 @@ def tophitsfromblast(filename, hits_list):
         # print(hit)
         hits_list.append(hit)
 
-# #taking top hits from balst, filtering the isoform, and making a list
-# def tophitsfromblast_filteringisoform(filename, hits_list):
-#     fi = open(filename, 'r')
-#     for line in fi:
-#         cols = line.split("\t")
-#         hit = cols[1]
-#         if "isoform" not in hit:
-#         # print(hit)
-#             hits_list.append(hit)
+#taking top hits from balst, filtering the isoform, and making a list
+def tophitsfromblast_filteringisoform(filename, hits_list):
+    fi = open(filename, 'r')
+    for line in fi:
+        cols = line.split("\t")
+        hit = cols[1]
+        if "isoform" not in hit:
+        # print(hit)
+            hits_list.append(hit)
 
 if __name__ == '__main__':
-    print("test")
+    print("Code is running don't worry!")
     fastadict={}
     filtered_dict = {}
     hits_list = []
