@@ -48,7 +48,8 @@ def create_bash_script(identifier, blast_database_name, input_file, base_folder)
     blast_folder = os.path.join(base_folder, "blast_results")
     sequence_folder = os.path.join(base_folder, "sequence_results")
     alignment_folder = os.path.join(base_folder, "alignment_results")
-    bashfiles_folder = os.path.join(base_folder, "bashfiles")
+    bashfiles_folder = os.path.join(base_folder, f"bashfiles_{sys.argv[2]}")
+    print("Creating bash files in ", bashfiles_folder)
     
     create_results_folder(blast_folder)
     create_results_folder(sequence_folder)
@@ -84,7 +85,9 @@ def create_bash_script(identifier, blast_database_name, input_file, base_folder)
 
 # sys.argv[1] is the name of the blast database
 input_protein_database = sys.argv[1]
-blast_database_name = re.sub(".faa", "", input_protein_database)
+print("Running code for blast database: ", input_protein_database)
+blast_database_name = re.sub(".faa", "", input_protein_database).split("/")[-1]
+print("Blast database name: ", blast_database_name)
 
 # sys.argv[2] is the input directory containing confirmed SIRP sequences
 input_directory = sys.argv[2]
@@ -97,6 +100,7 @@ for root, dirs, files in os.walk(input_directory, topdown=True):
         filename = os.path.join(root, file)
         if filename.endswith(".fa"):
             identifier = re.sub(".fa", "", filename.split("/")[-1])
+            # print("Creating bash file for ", identifier)
             create_bash_script(identifier, blast_database_name, filename, base_folder)
             # print("Running bash script for ", identifier)
 

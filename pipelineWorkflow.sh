@@ -46,8 +46,10 @@ python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py selected_vertebrate_prote
 ##-----The following code snippet will be used for running the ligands part of the pipeline.
 python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py selected_vertebrate_proteins_noisoform.faa ligands .
 
-##--The python line will make the necessary bashfiles and store them in the bashfiles folder. For running the bashfiles, we will use the following code snippet.
-for file in bashfiles/*.sh ; do
+##--The python line will make the necessary bashfiles and store them in the bashfiles folder. For running the bashfiles, we will use the following code snippet. 
+##-- This path of the bashfiles folder will need to be changed for the ligands part of the pipeline.
+
+for file in bashfiles_SIRP-seqs/*.sh ; do
     echo "Running $file"
     bash "$file"
 done

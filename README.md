@@ -5,6 +5,27 @@ Detect Signal Regulatory Proteins (SIRPs) in diverse genomes using this Python a
 You can clone this repo using 
 `git clone git@github.com:Rittika1/SIRP-Seeker-Pypeline.git`
 
+## Pre-requisites softwares for this
+You will need to install blast, mafft and iqtree for this. I am giving the links to download and install them. I can add code to run this on the cluster if you need to
+
+[BLAST](https://www.metagenomics.wiki/tools/blast/install)
+
+[MAFFT](https://mafft.cbrc.jp/alignment/software/)
+
+[IQTREE](http://www.iqtree.org/doc/Download)
+
+## Pre-requisites python packages for this
+You will need to install the following python packages for this
+- pandas
+- numpy
+- biopython
+- tqdm
+- subprocess
+- os
+- sys
+- re
+- argparse
+
 # SIRP Detection Workflow
 This document outlines the step-by-step workflow for downloading vertebrate protein datasets, filtering selected species, and applying the SIRP detection pipeline. The pipeline involves using command-line tools and custom Python scripts.
 
