@@ -26,7 +26,7 @@ import sys
 import re
 
 def create_blast_command(query_file, database, output_file):
-    return f'echo "Running Step 2: Execute BLAST" && blastp -query {query_file} -db {database} -num_threads 8 -evalue 1e-10 -out {output_file}'
+    return f'echo "Running Step 2: Execute BLAST" && blastp -query {query_file} -db {database} -num_threads 8 -outfmt 6 -evalue 1e-10 -out {output_file}'
 
 def create_python_sequence_command(input_database, blast_output, output_sequence):
     return f'echo "Running Step 3: Utilize BLAST results to get sequences" && python3 SIRP-Seeker-Pypeline/blastmatchsequencesprotein.py {input_database} {blast_output} {output_sequence}'
@@ -76,14 +76,15 @@ def create_bash_script(identifier, blast_database_name, input_file, base_folder)
         bash_file.write(f'# Step 5: Apply IQTREE for additional analysis\n')
         bash_file.write(create_iqtree_command(aligned_sequence_file) + '\n')
 
-        # bash_file.write(f'\n# Execute the script\n')
+        bash_file.write(f'\n# ------------------End of piepline. Go look at the trees now. Good luck! ----------------------\n')
         # bash_file.write(f'bash {bash_file_path}\n')
 
 # Step 1: Provide an input directory containing confirmed SIRP sequences downloaded from NCBI.
 # Currently includes human-sirp.fa, chicken-sirp.fa, and cattle-sirp.fa.
 
 # sys.argv[1] is the name of the blast database
-blast_database_name = sys.argv[1]
+input_protein_database = sys.argv[1]
+blast_database_name = re.sub(".faa", "", input_protein_database)
 
 # sys.argv[2] is the input directory containing confirmed SIRP sequences
 input_directory = sys.argv[2]
@@ -97,7 +98,6 @@ for root, dirs, files in os.walk(input_directory, topdown=True):
         if filename.endswith(".fa"):
             identifier = re.sub(".fa", "", filename.split("/")[-1])
             create_bash_script(identifier, blast_database_name, filename, base_folder)
-            # os.system(f'bash {os.path.join(base_folder, "bashfiles", f"sirp-pipeline-{identifier}.sh")}')
             # print("Running bash script for ", identifier)
 
 
