@@ -44,7 +44,7 @@ python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py database/selected_vertebr
 ##-----For Ian, since you will be running the ligands part of the pipeline, you will need to run the following code snippet.
 ##-----Make a separate folder named 'ligands' containing confirmed sequences for each species. I have made that folder for you. 
 ##-----The following code snippet will be used for running the ligands part of the pipeline.
-python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py database/selected_vertebrate_proteins_noisoform.faa ligands .
+python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py database/selected_vertebrate_proteins_noisoform.faa CD47-seqs .
 
 ##--The python line will make the necessary bashfiles and store them in the bashfiles folder. For running the bashfiles, we will use the following code snippet. 
 ##-- This path of the bashfiles folder will need to be changed for the ligands part of the pipeline.
@@ -53,3 +53,6 @@ for file in bashfiles_SIRP-seqs/*.sh ; do
     echo "Running $file"
     bash "$file"
 done
+
+##--The following snippet is for running the code on the cluster
+python SIRP-Seeker-Pypeline/sirp-detection-pipeline-hpc.py database/selected_vertebrate_proteins_noisoform.faa SIRP-seqs .
