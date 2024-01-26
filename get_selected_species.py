@@ -11,20 +11,28 @@ def filter_sequences(fasta_file, species_list_file, output_file):
 
     # Open the input fasta file and the output file
     with open(fasta_file, 'r') as input_file, open(output_file, 'w') as output_file:
-        current_sequence = None
-        current_species = None
+        current_sequence_header = None
+        current_sequence_lines = []
 
         # Iterate through each line in the fasta file
         for line in input_file:
             if line.startswith('>'):
-                # Extract species name from the sequence header
-                current_species = extract_species_name(line[1:])
-                current_sequence = line
-            else:
-                # If the current species is in the species list and "isoform" is not in the header, write the sequence to the output file
-                if current_species in species_list and "isoform" not in current_sequence.lower():
-                    output_file.write(current_sequence)
-                    output_file.write(line)
+                # Write the previous sequence to the output file (if it matches the criteria)
+                if current_sequence_header and "isoform" not in current_sequence_header.lower():
+                    output_file.write(current_sequence_header)
+                    output_file.writelines(current_sequence_lines)
+
+                # Reset the current sequence data
+                current_sequence_header = line if extract_species_name(line[1:]) in species_list else None
+                current_sequence_lines = []
+            elif current_sequence_header:
+                # Accumulate the sequence lines
+                current_sequence_lines.append(line)
+
+        # Write the last sequence to the output file (if it matches the criteria)
+        if current_sequence_header and "isoform" not in current_sequence_header.lower():
+            output_file.write(current_sequence_header)
+            output_file.writelines(current_sequence_lines)
 
 if __name__ == "__main__":
     # Check if the correct number of command-line arguments is provided
