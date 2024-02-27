@@ -98,9 +98,12 @@ if __name__ == "__main__":
 
     hitdata_file = sys.argv[1]
     fasta_file = sys.argv[2]
-    fasta_base = os.path.splitext(fasta_file)[0]
+    fasta_base = os.path.splitext(hitdata_file)[0]
     output_file = f"{fasta_base}_Igdomains.faa"
 
     hit_dict = parse_hitdata(hitdata_file)
     filter_fasta_sequences(fasta_file, hit_dict, output_file)
     print(f"Filtered sequences have been written to {output_file}")
+
+##--Usage: python get-Igdomains.py hitdata.txt cattle-sirpa_seq.faa
+##--python ../SIRP-Seeker-Pypeline/get-Igdomains.py cattle-sirpa_hitdata.txt ../sequence_results/cattle-sirpa_seq.faa 
