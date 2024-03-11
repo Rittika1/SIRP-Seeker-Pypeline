@@ -91,6 +91,30 @@ def filter_fasta_sequences(fasta_file_path, hit_dict, output_file_path):
                     output_file.write(new_header)
                     output_file.write(new_sequence)
 
+
+def remove_duplicate_sequences(fasta_file_path, output_file_path):
+    sequences = {}
+    with open(fasta_file_path, 'r') as fasta_file:
+        header = None
+        sequence = ''
+        for line in fasta_file:
+            if line.startswith('>'):
+                if header and sequence:
+                    if sequence not in sequences:
+                        sequences[sequence] = header
+                header = line.strip()
+                sequence = ''
+            else:
+                sequence += line.strip()
+        # Write the last sequence
+        if header and sequence:
+            if sequence not in sequences:
+                sequences[sequence] = header
+
+    with open(output_file_path, 'w') as output_file:
+        for sequence, header in sequences.items():
+            output_file.write(f"{header}\n{sequence}\n")
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python script.py <hitdata_file> <fasta_file>")
@@ -99,11 +123,14 @@ if __name__ == "__main__":
     hitdata_file = sys.argv[1]
     fasta_file = sys.argv[2]
     fasta_base = os.path.splitext(hitdata_file)[0]
-    output_file = f"{fasta_base}_Igdomains.faa"
+    filtered_file = f"{fasta_base}_Igdomains.faa"
+    deduped_file = f"{fasta_base}_Igdomains_deduped.faa"
 
     hit_dict = parse_hitdata(hitdata_file)
-    filter_fasta_sequences(fasta_file, hit_dict, output_file)
-    print(f"Filtered sequences have been written to {output_file}")
+    filter_fasta_sequences(fasta_file, hit_dict, filtered_file)
+    remove_duplicate_sequences(filtered_file, deduped_file)
+    print(f"Filtered and deduplicated sequences have been written to {deduped_file}")
 
-##--Usage: python get-Igdomains.py hitdata.txt cattle-sirpa_seq.faa
-##--python ../SIRP-Seeker-Pypeline/get-Igdomains.py cattle-sirpa_hitdata.txt ../sequence_results/cattle-sirpa_seq.faa 
+    ##Usage
+    ##python get-Igdomains.py hitdata.txt cattle-sirpa_seq.faa
+    ##python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/cattle-sirpa_hitdata.txt sequence_results/cattle-sirpa_seq.faa

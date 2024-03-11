@@ -41,12 +41,12 @@ module load famsa
 module load iqtree
 
 famsa {input_file} {aligned_file}
-iqtree -s {aligned_file} -m MFP -nt 8
+iqtree2 -s {aligned_file} -m MFP -nt 8 -bb 5000 -redo
 """
 
 # Iterate over Ig domain fasta files and create SLURM batch files
 for file in os.listdir(ig_domain_folder):
-    if file.endswith('_Igdomains.faa'):
+    if file.endswith('_Igdomains_deduped.faa'):
         job_name = file.split('_Igdomains')[0]
         input_file = os.path.join(ig_domain_folder, file)
         aligned_file = os.path.join(alignment_folder, f'{job_name}_aligned.faa')
@@ -65,4 +65,4 @@ for file in os.listdir(ig_domain_folder):
         subprocess.run(['sbatch', bash_file])
 
 ##--usage
-##--python script.py /scratch/rmallik1/SIRPS_newdata/Ig-domains
+##--python SIRP-Seeker-Pypeline/run-Igdomains-tree.py /scratch/rmallik1/SIRPS_newdata/Ig-domains
