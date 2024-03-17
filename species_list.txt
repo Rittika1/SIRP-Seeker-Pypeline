@@ -3,7 +3,6 @@ Struthio_camelus
 Falcunculus_frontatus
 Manacus_vitellinus
 Geospiza_fortis
-Geococcyx_californianus
 Gallus_gallus
 Spheniscus_humboldti
 Urocolius_indicus
@@ -46,7 +45,6 @@ Polyodon_spathula
 Acipenser_ruthenus
 Oryzias_javanicus
 Erpetoichthys_calabaricus
-Polypterus_senegalus
 Toxotes_jaculatrix
 Boleophthalmus_pectinirostris
 Chrysemys_picta
@@ -77,7 +75,7 @@ Physeter_catodon
 Gorilla_gorilla
 Nannospalax_galili
 Sarcophilus_harrisii
-Rattus_rattus
+Rattus_norvegicus
 Rousettus_aegyptiacus
 Dasypus_novemcinctus
 Pteropus_vampyrus

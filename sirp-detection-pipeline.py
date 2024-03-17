@@ -14,13 +14,12 @@ python3 blastmatchsequencesprotein.py inputdatabase  human-sirp-vertebrates.blas
 Step 3a: Add the sequences of the sirps to the big sequence files.
 seqfilemaker = "cat filename in inputDir >> human-sirp-vertebrates_seq.faa"
 # Step 4: Align the extracted sequences using FAMSA/MAFFT.
-mafft --thread 8 --auto --inputorder --reorder  human-sirp-vertebrates_seq.faa > human-sirp-vertebrates_seq_mafft.faa
+famsa --thread 8 --auto --inputorder --reorder  human-sirp-vertebrates_seq.faa > human-sirp-vertebrates_seq_famsa.faa
 
 # Step 5: Apply IQTREE for additional analysis on the aligned sequences.
-iqtree2 -s human-sirp-vertebrates_seq_mafft.faa -T 8
+iqtree2 -s human-sirp-vertebrates_seq_famsa.faa -T 8
 
 """
-
 import os
 import sys
 import re
@@ -107,4 +106,4 @@ for root, dirs, files in os.walk(input_directory, topdown=True):
 
 ##--------------HOW to run this code------------------##
 #python script.py selected_vertebrates_protein.fa input_directory /path/to/basefolder
-#python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py selected_vertebrates_protein_noisoform.fa SIRP-seqs .
+#python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py database/selected_vertebrate_proteins_noisoform.faa SIRP-seqs .

@@ -42,6 +42,11 @@ Tags Explanation:
 
 As of December 2023, 1237 protein files have been downloaded.
 
+Making sure you have downlaoded only one assembly of each species
+------------------------------------------------------------------
+
+Use the script `SIRP-Seeker-Pypeline/remove-multiple-assemblies-persp.py` to make a not of how many assemblies are there per species. This code concatenates the individual protein files into one mega protein file. This protein file is called vertebrates_proteins.faa
+
 Unzipping and Concatenating Protein Files
 -----------------------------------------
 
@@ -52,21 +57,24 @@ cat ncbi_dataset/data/*/protein.faa >> vertebrate_proteins.faa`
 
 Filtering Selected Species
 --------------------------
+Arrange the speices names properly in the fasta file using this code:
+`python3 SIRP-Seeker-Pypeline/filteringproteinfiles.py vertebrate_proteins.faa vertebrate_proteins_cleaned.faa`
 
 Filter out selected species from 'vertebrate_proteins.faa' using the Python script 'get_selected_species.py'. Provide the path to your fasta file, species list file, and the output file.
 
-`python3 get_selected_species.py vertebrate_proteins.faa species_list.txt selected_vertebrate_proteins_noisoform.faa`
+` python3 SIRP-Seeker-Pypeline/get_selected_species.py  vertebrate_proteins_cleaned.faa SIRP-Seeker-Pypeline/species_list.txt database/selected_vertebrate_proteins_noisoform.faa`
 
 Appending Additional Protein Files
 ----------------------------------
 
-Append two additional protein files annotated using Braker to the existing fasta file.
+Append two additional protein files annotated using Braker to the existing fasta file. Do not include the osseus as it is very fragmented
 
-`cat Lepisosteus_osseus_proteins.fa >> selected_vertebrate_proteins_noisoform.faa
-cat bichir_braker_proteins.fa >> selected_vertebrate_proteins_noisoform.faa`
+`cat Lepisosteus_osseus_proteins.fa >> database/selected_vertebrate_proteins_noisoform.faa 
+cat bichir_braker_proteins.fa >> database/selected_vertebrate_proteins_noisoform.faa`
 
 Creating BLAST Database
 -----------------------
+Make a folder named database and transfer the protein file there
 
 After modifying the protein file, create a database using NCBI BLAST.
 
@@ -80,7 +88,7 @@ Create a separate folder named 'SIRP-seqs' containing confirmed sequences for ea
 The following section represents a repeating part of the entire pipeline. A separate script will be created for this section to be used as a standalone part. The code above have to be run only once and it is done already
 
 
-`python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py selected_vertebrate_proteins_noisoform.faa SIRP-seqs .`
+`python SIRP-Seeker-Pypeline/sirp-detection-pipeline.py database/selected_vertebrate_proteins_noisoform.faa SIRP-seqs .`
 
 The Python script will generate necessary bashfiles and store them in the 'bashfiles' folder. To run the bashfiles, use the following code snippet.
 

@@ -1,5 +1,15 @@
 import sys
 
+# def extract_species_name(file_path):
+#     with open(file_path, 'r') as file:
+#         for line in file:
+#             if line.startswith('>'):
+#                 matches = re.findall(r'\[([^\]]+)\]', line)
+#                 if matches:
+#                     return matches[-1]
+#                 break
+#     return None
+
 def extract_species_name(header):
     # Extract species name from the first two words separated by "_"
     return '_'.join(header.split('_')[:2])
@@ -8,6 +18,7 @@ def filter_sequences(fasta_file, species_list_file, output_file):
     # Read the species names from the species list file
     with open(species_list_file, 'r') as species_file:
         species_list = [line.strip() for line in species_file]
+        # print(species_list)
 
     # Open the input fasta file and the output file
     with open(fasta_file, 'r') as input_file, open(output_file, 'w') as output_file:
@@ -17,8 +28,10 @@ def filter_sequences(fasta_file, species_list_file, output_file):
         # Iterate through each line in the fasta file
         for line in input_file:
             if line.startswith('>'):
+                # print(line)
                 # Write the previous sequence to the output file (if it matches the criteria)
                 if current_sequence_header and "isoform" not in current_sequence_header.lower():
+                    # print(current_sequence_header)
                     output_file.write(current_sequence_header)
                     output_file.writelines(current_sequence_lines)
 
@@ -31,6 +44,7 @@ def filter_sequences(fasta_file, species_list_file, output_file):
 
         # Write the last sequence to the output file (if it matches the criteria)
         if current_sequence_header and "isoform" not in current_sequence_header.lower():
+            # print(current_sequence_header)
             output_file.write(current_sequence_header)
             output_file.writelines(current_sequence_lines)
 
@@ -42,6 +56,7 @@ if __name__ == "__main__":
 
     # Get file paths from command-line arguments
     fasta_file_path = sys.argv[1]
+    # print(fasta_file_path)
     species_list_file_path = sys.argv[2]
     output_file_path = sys.argv[3]
 
@@ -53,4 +68,4 @@ if __name__ == "__main__":
 
 ##-----------HOW TO RUN----------------##
 ## python script.py path/to/your/fasta/file.fasta path/to/your/species/list/file.txt path/to/your/output/file.fasta
-## python3 get_selected_species.py ../vertebrate_proteins_cleaned.faa species_list.txt selected_vertebrate_proteins_noisoform.faa
+## python3 SIRP-Seeker-Pypeline/get_selected_species.py  vertebrate_proteins_cleaned.faa SIRP-Seeker-Pypeline/species_list.txt database/selected_vertebrate_proteins_noisoform.faa
