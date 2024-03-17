@@ -1,5 +1,5 @@
 '''
-This code takes a uniqueseq.phy file and then merges the Ig domains together, according to species. 
+This code takes a alignment fasta file and then merges the Ig domains together, according to species. 
 '''
 import sys
 
