@@ -25,5 +25,12 @@ plot_tree_barplot <- function(newick_tree_file, data_file, output_pdf) {
   dev.off()
 }
 
-plot_tree_barplot("paralogs/human-sirp-paralog-species.nwk", "paralogs/human-sirp-paralogs.txt", "paralogs/human-sirp-paralog-output_plot.pdf")
-plot_tree_barplot("paralogs/human-sirp-paralog-species.nwk", "Ig-domains/igdomaincount/human-igdomaincount.txt", "Ig-domains/igdomaincount/human-sirp-igdomain-output_plot.pdf")
+##-----Plotting the paralogs
+plot_tree_barplot("paralogs/chicken-sirp-paralogs-species.nwk", "paralogs/chicken-sirp-paralogs.txt", "paralogs/chicken-sirp-paralog-output_plot.pdf")
+plot_tree_barplot("paralogs/chicken-sirp-paralog-species.nwk", "paralogs/human-sirp-paralogs.txt", "paralogs/human-sirp-paralog-output_plot.pdf")
+plot_tree_barplot("paralogs/cattle-sirp-paralogs-species.nwk", "paralogs/cattle-sirp-paralogs.txt", "paralogs/cattle-sirp-paralog-output_plot.pdf")
+
+##----Plotting the Igdomain
+plot_tree_barplot("paralogs/human-sirp-paralog-species.nwk", "Ig-domains/igdomain-count/human-igdomaincount.txt", "Ig-domains/igdomain-count/human-sirp-igdomain-output_plot.pdf")
+plot_tree_barplot("paralogs/chicken-sirp-paralogs-species.nwk", "Ig-domains/igdomain-count/chicken-igdomaincount.txt", "Ig-domains/igdomain-count/chicken-sirp-igdomain-output_plot.pdf")
+plot_tree_barplot("paralogs/cattle-sirp-paralogs-species.nwk", "Ig-domains/igdomain-count/cattle-igdomaincount.txt", "Ig-domains/igdomain-count/cattle-sirp-igdomain-output_plot.pdf")

@@ -25,5 +25,8 @@ plot_ancestral_states <- function(newick_tree_file, paralog_count_file, output_p
   dev.off()
 }
 
-plot_ancestral_states("paralogs/human-sirp-paralog-species.nwk", "paralogs/human-sirp-paralogs.txt", "paralogs/paralog-output_plot.pdf", "paralogs/Ancestral State Reconstruction SIRP paralog")
-plot_ancestral_states("paralogs/human-sirp-paralog-species.nwk", "Ig-domains/igdomaincount/human-igdomaincount.txt", "Ig-domains/igdomaincount/paralog-output_plot.pdf", "Ig-domains/igdomaincount/Ancestral State Reconstruction Ig domains")
+##--Plotting the paralogs
+plot_ancestral_states("paralogs/human-sirp-paralog-species.nwk", "paralogs/human-sirp-paralogs.txt", "paralogs/paralogASR-output_plot.pdf", "paralogs/Ancestral State Reconstruction SIRP paralog")
+
+##--Plotting the igdomain counts
+plot_ancestral_states("paralogs/human-sirp-paralog-species.nwk", "Ig-domains/igdomain-count/human-igdomaincount.txt", "Ig-domains/igdomain-count/humanASR-igdomains-output_plot.pdf", "Ig-domains/igdomain-count/Ancestral State Reconstruction Ig domains")
