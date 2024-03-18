@@ -131,6 +131,11 @@ After these run the code `SIRP-Seeker-Pypeline/run_mergedIgdomain_tree.py` to me
 run the code `SIRP-Seeker-Pypeline/phylosignal-igdomains.R`. This takes in the input of the hitdata file from the NCBI CDD database. Prints out K and Lambda
 
 # Paralog count and plotting
-
+run the code like this 
+ 
+`python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/human-sirp-paralogs.txt`
+`cut -f 1 human-sirp-paralogs.txt > human-sirp-paralog-species.txt`
+After this, upload the species file to timetree.org to get a newick file. Save all these three files in the paralogs folder.
+Plot using the R code `SIRP-Seeker-Pypeline/plot-paralogs.R`
 
 # Igdomain count and plotting

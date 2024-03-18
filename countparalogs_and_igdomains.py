@@ -34,6 +34,9 @@ for key, val in countsdict.items():
 
 
 ##--usage
-##--python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/human-sirpa_hitdata_Igdomains_deduped.faa > Ig-domains/igdomaincount/human-igdomaincount.txt
-##--python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/human-sirp-paralogs.txt
-    
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/human-sirpa_hitdata_Igdomains_deduped.faa > Ig-domains/igdomain-count/human-igdomaincount.txt
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/cattle-sirpa_hitdata_Igdomains_deduped.faa > Ig-domains/igdomain-count/cattle-igdomaincount.txt
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/chicken-sirpa_hitdata_Igdomains_deduped.faa > Ig-domains/igdomain-count/chicken-igdomaincount.txt
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/human-sirp-paralogs.txt
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/trimmed-aliview/cattle-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/cattle-sirp-paralogs.txt   
+##--python3 SIRP-Seeker-Pypeline/countparalogs_and_igdomains.py Ig-domains/trimmed-aliview/chicken-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/chicken-sirp-paralogs.txt
