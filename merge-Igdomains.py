@@ -39,3 +39,7 @@ def main():
 if __name__ == '__main__':
     main()
 
+##--Usage
+##-- python3 SIRP-Seeker-Pypeline/merge-Igdomains.py Ig-domains/trimmed-aliview/cattle-sirpa_hitdata_aligned_trimmed.faa Ig-domains/trimmed-aliview/cattle-sirpa_hitdata_aligned_trimmed_merged.faa
+##-- python3 SIRP-Seeker-Pypeline/merge-Igdomains.py Ig-domains/trimmed-aliview/chicken-sirpa_hitdata_aligned_trimmed.faa Ig-domains/trimmed-aliview/chicken-sirpa_hitdata_aligned_trimmed_merged.faa
+##--python3 SIRP-Seeker-Pypeline/merge-Igdomains.py Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed.faa Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed_merged.faa

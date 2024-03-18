@@ -99,3 +99,38 @@ The Python script will generate necessary bashfiles and store them in the 'bashf
 done`
 
 This completes the SIRP detection workflow, including downloading datasets, filtering species, and running the pipeline.
+
+# Ig domain detection
+After getting the possible SIRPS detected and aligned, we need to find the Immunoglobulin domains. To do this, we have to use the NCBI CDD database available at `https://www.ncbi.nlm.nih.gov/Structure/bwrpsb/bwrpsb.cgi`
+
+Here, we upload the sequence file that are obtained after the first round of the pipeline. So the files under the sequence_results will be used. 
+The result will come as a text file as cattle-sirpa-hitdata.txt.
+To get the sequences of the Ig domains, we run the code `SIRP-Seeker-Pypeline/get-Igdomains.py`. 
+
+I ran these three lines:
+`python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/cattle-sirpa_hitdata.txt sequence_results/cattle-sirpa_seq.faa
+python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/chicken-sirpa_hitdata.txt sequence_results/chicken-sirp_seq.faa
+python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/human-sirpa_hitdata.txt sequence_results/human-sirp_seq.faa`
+
+After this, run the `SIRP-Seeker-Pypeline/run-Igdomains-tree.py` code to get the alignment and the tree running on the cluster. For that I ran the code:
+
+`python SIRP-Seeker-Pypeline/run-Igdomains-tree.py /scratch/rmallik1/SIRPS_newdata/Ig-domains`
+
+this will run the famsa and IQTREE2 and save the results into the folder `Ig-domains/igdomain-alignments/`
+
+# Trimming Ig domains
+The files named like  'human-sirpa_hitdata_aligned.faa' were opened using ALiview. any sequences that were long and on either side of the domains were trimmed and named as 'Ig-domains/trimmed-aliview/cattle-sirpa_hitdata_aligned_trimmed.faa'. 
+
+# Merging Ig domains to get full genes
+The trimmed Ig domains were then merged back using the code `SIRP-Seeker-Pypeline/merge-Igdomains.py` to get back the full genes per species. These files were named as _trimmed.faa.
+
+After these run the code `SIRP-Seeker-Pypeline/run_mergedIgdomain_tree.py` to merge these genes, align these and get the tree that it makes. This is ahrd coded I ran out of time to automate this
+
+
+# Phylogenetic signal calculation
+run the code `SIRP-Seeker-Pypeline/phylosignal-igdomains.R`. This takes in the input of the hitdata file from the NCBI CDD database. Prints out K and Lambda
+
+# Paralog count and plotting
+
+
+# Igdomain count and plotting

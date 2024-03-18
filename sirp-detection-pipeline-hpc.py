@@ -14,10 +14,10 @@ python3 blastmatchsequencesprotein.py inputdatabase  human-sirp-vertebrates.blas
 Step 3a: Add the sequences of the sirps to the big sequence files.
 seqfilemaker = "cat filename in inputDir >> human-sirp-vertebrates_seq.faa"
 # Step 4: Align the extracted sequences using FAMSA/MAFFT.
-mafft --thread 8 --auto --inputorder --reorder  human-sirp-vertebrates_seq.faa > human-sirp-vertebrates_seq_mafft.faa
+famsa --thread 8 --auto --inputorder --reorder  human-sirp-vertebrates_seq.faa > human-sirp-vertebrates_seq_famsa.faa
 
 # Step 5: Apply IQTREE for additional analysis on the aligned sequences.
-iqtree2 -s human-sirp-vertebrates_seq_mafft.faa -T 8
+iqtree2 -s human-sirp-vertebrates_seq_famsa.faa -T 8
 
 """
 
@@ -34,7 +34,7 @@ def create_slurm_commands(identifier):
         "#SBATCH --time=100:00:00\n",
         "#SBATCH --nodes=1\n",
         "#SBATCH --ntasks-per-node=8\n",
-        "#SBATCH --mem=150GB\n",
+        "#SBATCH --mem=250GB\n",
         "#SBATCH --mail-type=ALL\n",
         "#SBATCH --mail-user=rmallik1@uncc.edu",
         f"#SBATCH --error=/scratch/rmallik1/SIRPS_newdata/log-EO-files/sirps-pipeline-{identifier}_vertebrates.out\n\n"
@@ -42,7 +42,7 @@ def create_slurm_commands(identifier):
     return ''.join(slurm_commands)
 
 def add_modules():
-    return f'module load blast\nmodule load mafft\nmodule load iqtree\n'
+    return f'module load blast\nmodule load famsa\nmodule load iqtree\n'
 
 def create_blast_command(query_file, database, output_file):
     return f'echo "Running Step 2: Execute BLAST" && blastp -query {query_file} -db {database} -num_threads 8 -outfmt 6 -evalue 1e-10 -out {output_file}'
@@ -53,11 +53,11 @@ def create_python_sequence_command(input_database, blast_output, output_sequence
 def create_seq_filemaker_command(input_file, output_sequence):
     return f'echo "Running Step 3a: Add confirmed SIRP sequences back to big sequence files" && cat {input_file} >> {output_sequence}'
 
-def create_mafft_command(input_sequence, output_aligned_sequence):
-    return f'echo "Running Step 4: Align extracted sequences using FAMSA/MAFFT" && mafft --thread 8 --auto --inputorder --reorder {input_sequence} > {output_aligned_sequence}'
+def create_famsa_command(input_sequence, output_aligned_sequence):
+    return f'echo "Running Step 4: Align extracted sequences using FAMSA" && famsa -t 8 {input_sequence} {output_aligned_sequence}'
 
 def create_iqtree_command(input_aligned_sequence):
-    return f'echo "Running Step 5: Apply IQTREE for additional analysis" && iqtree2 -s {input_aligned_sequence} -T 8'
+    return f'echo "Running Step 5: Apply IQTREE for additional analysis" && iqtree2 -s {input_aligned_sequence} -T 8 -redo'
 
 def create_results_folder(output_folder):
     if not os.path.exists(output_folder):
@@ -86,7 +86,7 @@ def create_bash_script(identifier, blast_database_name, input_file, base_folder)
     # Define file paths for outputs
     blast_output_file = os.path.join(blast_folder, f"{identifier}-blastout.txt")
     sequence_file = os.path.join(sequence_folder, f"{identifier}_seq.faa")
-    aligned_sequence_file = os.path.join(alignment_folder, f"{identifier}_mafft.faa")
+    aligned_sequence_file = os.path.join(alignment_folder, f"{identifier}_famsa.faa")
     bash_file_path = os.path.join(bashfiles_folder, f"sirp-pipeline-{identifier}.sh")
 
     # Write commands to bash file
@@ -103,8 +103,8 @@ def create_bash_script(identifier, blast_database_name, input_file, base_folder)
         bash_file.write(f'# Step 3a: Add confirmed SIRP sequences back to big sequence files\n')
         bash_file.write(create_seq_filemaker_command(input_file, sequence_file) + '\n\n')
 
-        bash_file.write(f'# Step 4: Align extracted sequences using FAMSA/MAFFT\n')
-        bash_file.write(create_mafft_command(sequence_file, aligned_sequence_file) + '\n\n')
+        bash_file.write(f'# Step 4: Align extracted sequences using FAMSA/famsa\n')
+        bash_file.write(create_famsa_command(sequence_file, aligned_sequence_file) + '\n\n')
 
         bash_file.write(f'# Step 5: Apply IQTREE for additional analysis\n')
         bash_file.write(create_iqtree_command(aligned_sequence_file) + '\n')

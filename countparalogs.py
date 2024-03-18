@@ -35,5 +35,5 @@ for key, val in countsdict.items():
 
 ##--usage
 ##--python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/human-sirpa_hitdata_Igdomains_deduped.faa > Ig-domains/igdomaincount/human-igdomaincount.txt
-##--python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/human-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/human-sirp-paralogs.txt
+##--python3 SIRP-Seeker-Pypeline/countparalogs.py Ig-domains/trimmed-aliview/human-sirpa_hitdata_aligned_trimmed_merged.faa > paralogs/human-sirp-paralogs.txt
     

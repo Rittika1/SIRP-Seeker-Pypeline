@@ -134,3 +134,6 @@ if __name__ == "__main__":
     ##Usage
     ##python get-Igdomains.py hitdata.txt cattle-sirpa_seq.faa
     ##python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/cattle-sirpa_hitdata.txt sequence_results/cattle-sirpa_seq.faa
+    ##--python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/chicken-sirpa_hitdata.txt sequence_results/chicken-sirp_seq.faa
+    ##--python SIRP-Seeker-Pypeline/get-Igdomains.py Ig-domains/human-sirpa_hitdata.txt sequence_results/human-sirp_seq.faa
+

@@ -35,7 +35,7 @@ cd /scratch/rmallik1/SIRPS_newdata/
 
 python3 {python_script_path} {os.path.join(input_dir, filename)} {os.path.join(input_dir, base_name)}_merged.faa
 famsa {os.path.join(input_dir, base_name)}_merged.faa {os.path.join(input_dir, base_name)}_merged_aligned.faa
-iqtree2 -s {os.path.join(input_dir, base_name)}_merged_aligned.faa -m MFP -nt 16 -bb 5000
+iqtree2 -s {os.path.join(input_dir, base_name)}_merged_aligned.faa -m MFP -nt 16 -bb 5000 -redo
 """
 
         # Write the SLURM script to a file
@@ -45,3 +45,6 @@ iqtree2 -s {os.path.join(input_dir, base_name)}_merged_aligned.faa -m MFP -nt 16
 
         # Submit the SLURM job
         subprocess.run(['sbatch', script_path])
+
+##--Usage
+##--python3 SIRP-Seeker-Pypeline/run_mergedIgdomain_tree.py
