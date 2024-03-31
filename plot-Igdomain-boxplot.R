@@ -25,8 +25,8 @@ library(phytools)
 # file_path <- "~/Rittika-work/SIRPs_newdata/Ig-domains/human-sirpa_hitdata.txt"
 
 ## Set the file path
-file_path <- "/home/rittika/Rittika-work/SIRPs_newdata/Ig-domains/cattle-sirpa_hitdata.txt"
-tree_path <- "~/Rittika-work/SIRPs_newdata/paralogs/cattle-sirp-paralogs-species.nwk"
+file_path <- "/home/rittika/Rittika-work/SIRPs_newdata/Ig-domains/chicken-sirpa_hitdata.txt"
+tree_path <- "/home/rittika/Rittika-work/SIRPs_newdata/paralogs/chicken-sirp-paralogs-species.nwk"
 # Read the data from the file
 data <- readLines(file_path)
 vert_tree <- read.tree(tree_path)
@@ -73,6 +73,6 @@ par(mfrow=c(1,2))
 plotTree(vert_tree,mar=c(5.1,1.1,2.1,0.1))
 par(mar=c(5.1,0.1,2.1,1.1))
 boxplot(igdomaincount~factor(names(igdomaincount),levels=vert_tree$tip.label),horizontal=TRUE,
-        axes=FALSE,xlim=c(1,Ntip(vert_tree)), col="steelblue")
+        axes=FALSE,xlim=c(1,Ntip(vert_tree)), col="salmon4")
 axis(1)
-title(xlab="Cattle SIRP immunogloulin domain count")
+title(xlab="chcken SIRP immunoglobulin domain count")

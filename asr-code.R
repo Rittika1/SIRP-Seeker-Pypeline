@@ -1,6 +1,7 @@
 library(phytools)
 library(geiger)
 library(ape)
+library(viridis)
 packageVersion("phytools")
 
 setwd("/home/rittika/Rittika-work/SIRPs_newdata/")
@@ -17,7 +18,7 @@ plot_ancestral_states <- function(newick_tree_file, paralog_count_file, output_p
   count_vector <- setNames(paralog_counts$Count, paralog_counts$Species)
   
   # Perform ancestral state reconstruction
-  reconstructed_states <- contMap(tree, count_vector, plot = FALSE)
+  reconstructed_states <- contMap(tree, count_vector, plot = FALSE, col=viridis())
   
   # Save the plot to a PDF
   pdf(file = output_pdf)

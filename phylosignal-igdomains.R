@@ -10,10 +10,10 @@ library(phytools)
 library(geiger)
 
 ##Input Files
-file_path <- "~/Rittika-work/SIRPs_newdata/Ig-domains/cattle-sirpa_hitdata.txt"
-vert_tree_path<- "~/Rittika-work/SIRPs_newdata/Ig-domains/cattlesirpa_species_output.nwk"
+file_path <- "~/Rittika-work/SIRPs_newdata/Ig-domains/human-sirpa_hitdata.txt"
+vert_tree_path<- "~/Rittika-work/SIRPs_newdata/Ig-domains/humansirpa_species_output.nwk"
 
-output_path <- "~/Rittika-work/SIRPs_newdata/Ig-domains/cattlesirpa_species_output.txt"
+output_path <- "~/Rittika-work/SIRPs_newdata/Ig-domains/humansirpa_species_output.txt"
 
 calculate_ig_domains <- function(file_path, output_path) {
   # Read the data from the file
